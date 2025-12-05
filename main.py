@@ -1,24 +1,35 @@
 import os
+import time
 
-pacientes = []
-medicos = []
-consultas = []
+patients = []
+doctors = []
+appointments = []
 
-""" def createUser(name, age, gender, tel, address):
+def createUser(name, age, gender, tel, address):
     newUser = { 
         "name": name, 
         "age": age, 
         "gender": gender, 
         "tel": tel, 
-        "address": address
+        "address": address,
+        "createdAt": time.time(),
+        "updatedAt": time.time()
     }
-    return newUser """
+    return newUser 
+
+def askForInfo(type):
+    name = input('Informe o nome do '+type+': ')
+    age = int(input('Informe a idade do '+type+': '))
+    gender = input('Informe o gênero do '+type+': ')
+    tel = input('Informe o número de telefone do '+type+': ')
+    address = input('Informe o endereço do '+type+': ')
+    newEntity = createUser(name, age, gender, tel, address)
+    return newEntity
 
 def doctorActionsMenu():
     op = ''
     
     while (op != 5):
-        os.system('cls' if os.name == 'nt' else 'clear')
         print('\n\n====== SISTEMA HOSPITALAR - IFRS ======\n' \
         '====== MENU DE MÉDICOS ======\n\n' \
         '- 1 Cadastrar novo médico\n' \
@@ -30,8 +41,8 @@ def doctorActionsMenu():
         op = int(input('Selecione uma opção: '))
 
         if op == 1:
-            #TODO
-            print('')
+            newDoctor = askForInfo('médico')
+            doctors.append(newDoctor)
         elif op == 2:
             #TODO
             print('')
@@ -44,12 +55,10 @@ def doctorActionsMenu():
         elif op == 5:
             return
 
-
 def pacientActionsMenu():
     op = ''
     
     while (op != 5):
-        os.system('cls' if os.name == 'nt' else 'clear')
         print('\n\n====== SISTEMA HOSPITALAR - IFRS ======\n' \
         '====== MENU DE PACIENTES ======\n\n' \
         '- 1 Cadastrar novo paciente\n' \
@@ -61,8 +70,8 @@ def pacientActionsMenu():
         op = int(input('Selecione uma opção: '))
 
         if op == 1:
-            #TODO
-            print('')
+            newPatient = askForInfo('paciente')
+            patients.append(newPatient)
         elif op == 2:
             #TODO
             print('')
