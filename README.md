@@ -94,3 +94,4 @@ projeto-hospital-IFRS
 ┗ README.md
 ````
 
+Documentação completa disponível em /docs/Documentacao_Sistema_Hospitalar.pdf
