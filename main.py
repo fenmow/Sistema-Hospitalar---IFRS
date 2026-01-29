@@ -5,10 +5,6 @@ import pymongo
 from pymongo.server_api import ServerApi
 from bson import ObjectId
 
-# =========================
-# CONEXÃO
-# =========================
-
 uri = "mongodb+srv://mainUser_db_user:coCfh8CQmR2H8d7K@clusterprojeto.3avx00c.mongodb.net/?appName=ClusterProjeto"
 client = pymongo.MongoClient(uri, server_api=ServerApi('1'))
 
@@ -28,9 +24,6 @@ appointments = db["appointments"]
 health_plans = db["health_plans"]
 
 
-# =========================
-# INPUT
-# =========================
 def get_int(msg, allow_empty=False):
     while True:
         value = input(msg)
@@ -45,10 +38,6 @@ def get_int(msg, allow_empty=False):
         except:
             print("Entrada inválida. Digite um número.")
 
-
-# =========================
-# PLANOS DE SAÚDE
-# =========================
 def createHealthPlan(name, plan_type, coverage):
     return health_plans.insert_one({
         "name": name,
@@ -69,9 +58,6 @@ def listHealthPlans():
         print(f"ID: {plan['_id']} | Nome: {plan['name']} | Tipo: {plan['type']} | Ativo: {plan['active']}")
 
 
-# =========================
-# CRIAÇÃO DE USUÁRIOS
-# =========================
 def createUser(name, age, gender, tel, address, health_plan_id=None, user_type=None):
     doc = {
         "name": name,
@@ -104,9 +90,6 @@ def createAppointment(patientName, doctorName, date):
     })
 
 
-# =========================
-# LISTAGENS
-# =========================
 def listPatients():
     lista = list(patients.find())
     print("\nPacientes cadastrados:")
@@ -130,9 +113,6 @@ def listAppointments():
         print(f"ID: {a['_id']} | Paciente: {a['patientName']} | Médico: {a['doctorName']} | Data: {a['date'].strftime('%d/%m/%Y')}")
 
 
-# =========================
-# CADASTRO
-# =========================
 def askForInfo(type):
     os.system("cls" if os.name == "nt" else "clear")
 
@@ -197,10 +177,6 @@ def askForAppointmentInfo():
 
     createAppointment(patientName, doctorName, date)
 
-
-# =========================
-# REMOÇÕES POR ID
-# =========================
 def RemoveAppointment():
     listAppointments()
     _id = input("\nID da consulta para excluir: ")
@@ -245,10 +221,7 @@ def RemoveDoctor():
     input("ENTER...")
 
 
-# =========================
-# UPDATE
-# =========================
-def updateUser(collection, label):
+def updateUser(collection):
     lista = list(collection.find())
 
     listPatients() if collection == patients else listDoctors()
@@ -298,10 +271,6 @@ def updateUser(collection, label):
     print("Atualizado!")
     input("ENTER...")
 
-
-# =========================
-# MENUS
-# =========================
 def pacientActionsMenu():
     while True:
         os.system("cls" if os.name == "nt" else "clear")
@@ -366,9 +335,6 @@ def appointmentsActionsMenu():
             return
 
 
-# =========================
-# MAIN MENU
-# =========================
 def mainMenu():
 
     if health_plans.count_documents({}) == 0:
